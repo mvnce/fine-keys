@@ -32,6 +32,13 @@ final class MediaKeyInterceptor {
         refresh(retry: true)
     }
 
+    func requestAccessibilityPermission() {
+        guard !AXIsProcessTrusted() else { return }
+        let key = kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String
+        let options = [key: true] as CFDictionary
+        AXIsProcessTrustedWithOptions(options)
+    }
+
     func refresh(retry: Bool = false) {
         precondition(Thread.isMainThread)
         guard enabled else { stop(); state = .disabled; return }

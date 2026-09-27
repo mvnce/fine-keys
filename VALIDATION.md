@@ -26,7 +26,7 @@ Record the macOS version, keyboard, display, audio output, and whether MonitorCo
 5. Test Option, Shift, Option–Shift, Command, and Control combinations against the app-disabled baseline. Explicit shortcuts must retain their native behavior. Test Fn and Caps Lock as well.
 6. Check mute, play/pause, track keys, ordinary typing, and menu interaction.
 7. Sleep/wake, reconnect the external keyboard, and switch audio outputs. Controls must recover or report an accurate unavailable state.
-8. Revoke Accessibility. Opening the menu should report permission required; otherwise the health check should detect it within roughly 30 seconds. Grant it again and confirm recovery.
+8. Revoke Accessibility. Opening the menu should report permission required; otherwise the health check should detect it within roughly 30 seconds. Choose Grant Accessibility Permission and confirm that macOS presents or opens the approval flow. Grant it again and confirm recovery.
 9. Enable Launch at Login, follow pending approval if requested, cancel it, and verify the system setting. Test login once enabled and again after disabling it.
 10. Repeat with other media-key utilities enabled and disabled. Document unsupported conflicts; do not silently disable another app.
 11. Quit FineKeys and verify native keys behave normally. Repeat using the final installed and signed bundle.

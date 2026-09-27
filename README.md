@@ -36,7 +36,7 @@ FineKeys is currently a development project. A future public release should be D
 1. Download the release archive when one is available.
 2. Drag `FineKeys.app` to `/Applications`.
 3. Open FineKeys. Its control appears in the menu bar.
-4. Choose **Setup & Help…** and grant Accessibility access when macOS requests it.
+4. FineKeys requests Accessibility access on first launch. If it is not granted, choose **Grant Accessibility Permission…** or **Setup & Help…** from the menu and approve it in System Settings.
 5. Press your usual volume or brightness keys to use fine adjustments.
 
 For a locally built development app, macOS may require you to remove and re-add FineKeys in Accessibility after rebuilding it. If launch-at-login approval is pending, FineKeys opens the relevant Login Items settings page.
@@ -50,6 +50,7 @@ Open the FineKeys item in the menu bar and choose the controls you want:
 | **Fine volume keys** | Enables smaller increments for the volume up and down keys. |
 | **Fine brightness keys** | Enables smaller increments for the brightness up and down keys. |
 | **Launch at Login** | Starts FineKeys after you sign in to macOS. |
+| **Grant Accessibility Permission…** | Appears while access is missing and asks macOS to show the authorization prompt. |
 | **Setup & Help…** | Explains setup and opens Accessibility settings. |
 | **Retry Key Interception** | Appears after a failed event-tap setup and tries again. |
 

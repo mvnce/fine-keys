@@ -47,6 +47,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         menu.addItem(.separator())
         add("Fine volume keys", #selector(toggle(_:)), key: "volume")
         add("Fine brightness keys", #selector(toggle(_:)), key: "brightness")
+        if interceptor.state == .permissionRequired { add("Grant Accessibility Permission…", #selector(showHelp)) }
         if case .failed = interceptor.state { add("Retry Key Interception", #selector(retry)) }
         menu.addItem(.separator())
         switch SMAppService.mainApp.status {
@@ -112,6 +113,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         alert.runModal()
     }
     @objc private func showHelp() {
+        interceptor.requestAccessibilityPermission()
         NSApp.activate(ignoringOtherApps: true)
         let alert = NSAlert()
         alert.messageText = "Make small adjustments with FineKeys"
