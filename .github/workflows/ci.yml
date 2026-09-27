@@ -1,0 +1,45 @@
+name: FineKeys CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Build and test
+    runs-on: macos-15
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Run policy tests
+        run: ./scripts/test.sh
+
+      - name: Build development package
+        env:
+          FINEKEYS_BUILD_DIR: ${{ runner.temp }}/fine-keys-build
+        run: ./scripts/package.sh development
+
+      - name: Stage development package
+        env:
+          FINEKEYS_BUILD_DIR: ${{ runner.temp }}/fine-keys-build
+        run: |
+          archive="$(find "$FINEKEYS_BUILD_DIR" -type f -name 'FineKeys-development.zip' -print -quit)"
+          test -n "$archive"
+          mkdir -p "$RUNNER_TEMP/fine-keys-artifact"
+          cp "$archive" "$RUNNER_TEMP/fine-keys-artifact/FineKeys-development.zip"
+
+      - name: Upload development package
+        uses: actions/upload-artifact@v4
+        with:
+          name: FineKeys-development
+          path: ${{ runner.temp }}/fine-keys-artifact/FineKeys-development.zip
+          if-no-files-found: error
+          retention-days: 7
